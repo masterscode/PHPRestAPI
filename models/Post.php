@@ -18,9 +18,10 @@ class Post{
         // var_dump($this->connector);
         }
     // get posts
-    
+
     public function setID($id){
-        return $this->id = $id;
+         $this->id = $id;
+         return $this->id;
     }
     public function read(){
         //create query
@@ -90,5 +91,11 @@ class Post{
         return $this->connector->queryDB($query, 
         ['title'=>$title, 'body' =>$body, 'author'=> $author, 'id'=>$id]);
     }
+
+    public function deletePost(){
+        $query = "DELETE FROM $this->table WHERE  id = :id";
+        $stmt = $this->connector->queryDB($query, ['id' => htmlspecialchars($this->id)]);
+    }
+
     }
     
